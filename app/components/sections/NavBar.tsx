@@ -5,9 +5,13 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Logo from "../Logo";
 import { useRouter } from "next/navigation";
+import { signIn, signOut, useSession } from "next-auth/react";
+import Image from "next/image";
+import { DropdownMenuDemo } from "../shadcn/dropdown/ProfileDropDownMenu";
 
 const Navbar: React.FC = () => {
   const router = useRouter();
+  const { data: session } = useSession();
 
   return (
     <nav className="bg-white shadow-sm">
@@ -38,21 +42,44 @@ const Navbar: React.FC = () => {
               </Link>
             </div>
           </div>
-          <div className="hidden sm:ml-6 sm:flex sm:items-center">
-            <Button
-              onClick={() => router.push("/login")}
-              variant="outline"
-              className="mr-2 rounded-none border-black text-black hover:border-[#FACC15] hover:bg-whaite hover:text-[#FACC15]"
-            >
-              Log in
-            </Button>
-            <Button
-              onClick={() => router.push("/signup")}
-              className="rounded-none bg-[#FACC15] text-white hover:bg-[#E3B714]"
-            >
-              Sign up
-            </Button>
-          </div>
+
+          {session ? (
+            <div className="flex ">
+              <div
+                onClick={() => router.push("/settings")}
+                className="mr-3
+                cursor-pointer text-black  hover:text-[#FACC15] inline-flex items-center px-1 pt-1 text-sm font-medium transition-colors duration-200"
+              >
+                {session.user?.name}
+              </div>
+              <DropdownMenuDemo />
+              {/* <Image
+                width={15}
+                height={15}
+                src={session.user?.image as string}
+                className="rounded-full h-10 w-10"
+                alt=""
+              /> */}
+              {/* <div>{JSON.stringify(session)}</div> */}
+            </div>
+          ) : (
+            <div className="hidden sm:ml-6 sm:flex sm:items-center">
+              <Button
+                onClick={() => router.push("/login")}
+                variant="outline"
+                className="mr-2 rounded-none border-black text-black hover:border-[#FACC15] hover:bg-whaite hover:text-[#FACC15]"
+              >
+                Log in
+              </Button>
+              <Button
+                onClick={() => router.push("/signup")}
+                className="rounded-none bg-[#FACC15] text-white hover:bg-[#E3B714]"
+              >
+                Sign up
+              </Button>
+            </div>
+          )}
+
           <div className="flex items-center sm:hidden">
             <Button
               variant="ghost"

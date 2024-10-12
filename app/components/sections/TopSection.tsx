@@ -37,7 +37,7 @@ export default function TopSection() {
           </div>
         </div>
         <div className="w-full flex justify-center items-center">
-          <Image width={400} src={JobHunt} alt="" />
+          <Image width={400} src={JobHunt} alt="find remote jobs" />
         </div>
       </main>
     </div>
