@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "./components/sections/NavBar";
 import SessionWrapper from "./components/SessionWrapper";
 import { headers } from "next/headers";
+import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,19 +28,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const headersList = headers();
-  const pathname = headersList.get("x-pathname") || ""; // Accessing the pathname
-
-  // Check if the route is /login or /signup
-  const excludeNavbar = pathname === "/login" || pathname === "/signup";
-
   return (
     <SessionWrapper>
       <html lang="en">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          {/* {excludeNavbar ? <Navbar /> : null} */}
           <Navbar />
           {children}
         </body>

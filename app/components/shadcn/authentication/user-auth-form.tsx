@@ -61,7 +61,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       </div> */}
       <Button
         onClick={() => {
-          signIn("github");
+          signIn("github", { callbackUrl: "/" });
         }}
         className="bg-main "
         variant="outline"
@@ -77,7 +77,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       </Button>
       <Button
         onClick={() => {
-          signIn("google");
+          signIn("google", { callbackUrl: "/" });
         }}
         className="bg-main "
         variant="outline"

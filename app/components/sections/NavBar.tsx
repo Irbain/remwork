@@ -4,17 +4,29 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Logo from "../Logo";
-import { useRouter } from "next/navigation";
-import { signIn, signOut, useSession } from "next-auth/react";
-import Image from "next/image";
-import { DropdownMenuDemo } from "../shadcn/dropdown/ProfileDropDownMenu";
+import { usePathname, useRouter } from "next/navigation";
 
-const Navbar: React.FC = () => {
+import { DropdownMenuDemo } from "../shadcn/dropdown/ProfileDropDownMenu";
+import { cn } from "@/lib/utils";
+import { useSession } from "next-auth/react";
+
+interface NavbarProps {
+  path?: string; // Allow className to be passed as a prop
+}
+
+const Navbar: React.FC<NavbarProps> = () => {
   const router = useRouter();
   const { data: session } = useSession();
+  const pathname = usePathname();
 
   return (
-    <nav className="bg-white shadow-sm">
+    <nav
+      className={cn(
+        pathname === "/login" || pathname === "/signup"
+          ? "hidden"
+          : " bg-white shadow-sm"
+      )}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex justify-center items-center">
@@ -80,7 +92,8 @@ const Navbar: React.FC = () => {
             </div>
           )}
 
-          <div className="flex items-center sm:hidden">
+          <div className=" items-center hidden">
+            {/* add flex sm:hidden later */}
             <Button
               variant="ghost"
               className="inline-flex items-center justify-center p-2 text-gray-400 hover:text-[#FACC15] hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#FACC15]"

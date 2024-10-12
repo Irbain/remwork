@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { UserAuthForm } from "@/app/components/shadcn/authentication/user-auth-form";
 import Logo from "../../Logo";
+import laptop from "@/public/keyboard.jpg";
 
 export const metadata: Metadata = {
   title: "Authentication",
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 export default function AuthenticationPage({ login = true }) {
   return (
     <>
-      <div className="md:hidden h-screen">
+      {/* <div className="md:hidden h-screen">
         <Image
           src=""
           width={1280}
@@ -30,7 +31,7 @@ export default function AuthenticationPage({ login = true }) {
           alt="Authentication"
           className="hidden dark:block"
         />
-      </div>
+      </div> */}
       <div className="h-screen container relative hidden  flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
         <Link
           href={login ? "/login" : "/signup"}
@@ -43,8 +44,12 @@ export default function AuthenticationPage({ login = true }) {
         </Link>
         <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
           <div className="absolute inset-0 bg-zinc-900" />
+          <Image fill src={laptop} alt="computer keybord" />
+          {/* Photo by Sora Shimazaki: https://www.pexels.com/photo/crop-faceless-person-typing-on-laptop-keyboard-in-darkness-5926370/ */}
           <div className="relative z-20 flex items-center text-lg font-medium">
-            <Logo />
+            <Link href="/" className="flex-shrink-0 flex items-center">
+              <Logo />
+            </Link>
           </div>
           <div className="relative z-20 mt-auto">
             <blockquote className="space-y-2">
