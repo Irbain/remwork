@@ -49,7 +49,9 @@ export default function AccordionWrapper({
     { question: qone, answer: aone },
     { question: qtwo, answer: atwo },
     { question: qthree, answer: athree },
-  ].filter((item) => item.question && item.answer);
+  ].filter(
+    (item): item is AccordionItemProps => !!item.question && !!item.answer
+  );
 
   return <DynamicAccordion items={items} />;
 }

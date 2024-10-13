@@ -2,7 +2,6 @@
 import Image from "next/image";
 import React from "react";
 import { useSession } from "next-auth/react";
-import { Dna } from "lucide-react";
 
 const Profile = () => {
   const { data: session } = useSession();

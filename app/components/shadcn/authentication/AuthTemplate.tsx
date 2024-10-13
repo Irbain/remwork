@@ -73,7 +73,7 @@ export default function AuthenticationPage({ login = true }) {
                   : "Select you login option"}
               </p>
             </div>
-            <UserAuthForm />
+            <UserAuthForm className="" />
             <p className="px-8 text-center text-sm text-muted-foreground">
               By clicking continue, you agree to our{" "}
               <Link

@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 
 import { Search } from "lucide-react";
 import JobHunt from "@/public/job_hunt.svg";
-import Logo from "../Logo";
 import Image from "next/image";
 
 export default function TopSection() {
