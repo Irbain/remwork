@@ -33,7 +33,7 @@ export function DropdownMenuDemo() {
         <Image
           width={15}
           height={15}
-          src={session.user?.image as string}
+          src={session?.user?.image as string}
           className="rounded-full h-10 w-10 cursor-pointer"
           alt=""
         />
@@ -44,7 +44,7 @@ export function DropdownMenuDemo() {
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <User className="mr-2 h-4 w-4" />
-            <span onClick={() => router.push("/profil")}>Profile</span>
+            <span onClick={() => router.push("/profile")}>Profile</span>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <MessageSquare className="mr-2 h-4 w-4" />
@@ -52,7 +52,9 @@ export function DropdownMenuDemo() {
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Settings className="mr-2 h-4 w-4" />
-            <span onClick={() => router.push("/settings")}>Settings</span>
+            <span onClick={() => router.push("/settings/profile")}>
+              Settings
+            </span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
 

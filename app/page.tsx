@@ -1,10 +1,6 @@
-import { Button } from "@/components/ui/button";
 import AccordionWrapper from "./components/AccordionWrapper";
 import Divider from "./components/Divider";
 import Footer from "./components/Footer";
-import Image from "next/image";
-import SettingsProfilePage from "./components/shadcn/forms/page";
-import SettingsLayout from "./components/shadcn/forms/layout";
 import NewsLetters from "./components/sections/NewsLetters";
 import MaxWidthWrapper from "./components/MaxWidthWrapper";
 import TopSection from "./components/sections/TopSection";

@@ -30,8 +30,8 @@ import { Textarea } from "@/components/ui/textarea";
 const profileFormSchema = z.object({
   username: z
     .string()
-    .min(2, {
-      message: "Username must be at least 2 characters.",
+    .min(3, {
+      message: "Username must be at least 3 characters.",
     })
     .max(30, {
       message: "Username must not be longer than 30 characters.",
@@ -55,11 +55,8 @@ type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 // This can come from your database or API.
 const defaultValues: Partial<ProfileFormValues> = {
-  bio: "I own a computer.",
-  urls: [
-    { value: "https://shadcn.com" },
-    { value: "http://twitter.com/shadcn" },
-  ],
+  bio: "Tell us about yourself.",
+  urls: [{ value: "https://website.com" }, { value: "http://x.com/username" }],
 };
 
 export function ProfileForm() {

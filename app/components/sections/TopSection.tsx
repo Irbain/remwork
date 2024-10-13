@@ -9,7 +9,7 @@ import Image from "next/image";
 
 export default function TopSection() {
   return (
-    <div className="bg-gradient-to-b from-[#FACC15]/10 to-background min-h-screen flex flex-col ">
+    <div className="bg-gradient-to-b from-[#FACC15]/10 to-background max-h-screen flex flex-col ">
       <main className="flex justify-around container mx-auto px-4 py-12 ">
         <div className="w-full flex-col self-center p-10">
           <h1 className="text-5xl font-bold mb-6">
