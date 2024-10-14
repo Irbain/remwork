@@ -58,7 +58,7 @@ const Navbar: React.FC<NavbarProps> = () => {
           {session ? (
             <div className="flex ">
               <div
-                onClick={() => router.push("/settings")}
+                onClick={() => router.push("/profile")}
                 className="mr-3
                 cursor-pointer text-black  hover:text-[#FACC15] inline-flex items-center px-1 pt-1 text-sm font-medium transition-colors duration-200"
               >

@@ -48,7 +48,7 @@ export default function AuthenticationPage({ login = true }) {
           {/* Photo by Sora Shimazaki: https://www.pexels.com/photo/crop-faceless-person-typing-on-laptop-keyboard-in-darkness-5926370/ */}
           <div className="relative z-20 flex items-center text-lg font-medium">
             <Link href="/" className="flex-shrink-0 flex items-center">
-              <Logo />
+              <Logo bgColor="black" />
             </Link>
           </div>
           <div className="relative z-20 mt-auto">

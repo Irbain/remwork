@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 
-import Link from "next/link";
+import Logo from "./Logo";
 
 const Footer = () => {
   const pathname = usePathname();
@@ -16,64 +16,46 @@ const Footer = () => {
         )}
 
         {pathsToMinimize.includes(pathname) ? null : (
-          <div>
-            <div className="relative flex items-center px-6 py-6 sm:py-8 lg:mt-0">
-              <div className="absolute inset-0 overflow-hidden rounded-lg">
-                <div
-                  aria-hidden="true"
-                  className="absolute bg-zinc-50 inset-0 bg-gradient-to-br bg-opacity-90"
-                />
+          <footer className="bg-black text-white py-8">
+            <div className="container mx-auto px-4">
+              <div className="text-center mb-6">
+                <p>&copy; 2024 remwork. All rights reserved.</p>
               </div>
+              <div className="flex flex-col md:flex-row justify-between items-center">
+                <Logo bgColor="black" />
 
-              <div className="text-center relative mx-auto max-w-sm">
-                <h3 className="font-semibold text-main">
-                  Are You A Recruter ?
-                </h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  If you&apos;d like to post your offers, you can do so in
-                  minutes.{" "}
-                  <Link
-                    href="/sign-in?as=seller"
-                    className="whitespace-nowrap font-medium text-black hover:text-zinc-900"
-                  >
-                    Get started &rarr;
-                  </Link>
-                </p>
+                <nav className="mt-4 md:mt-0">
+                  <ul className="flex space-x-6">
+                    <li>
+                      <a
+                        href="#"
+                        className="hover:text-[#FACC15] transition-colors"
+                      >
+                        Privacy Policy
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="hover:text-[#FACC15] transition-colors"
+                      >
+                        Terms of Service
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="hover:text-[#FACC15] transition-colors"
+                      >
+                        Contact Us
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
               </div>
             </div>
-          </div>
+          </footer>
         )}
-      </div>
-
-      <div className="mx-10 py-10 md:flex md:items-center md:justify-between">
-        <div className="text-center md:text-left">
-          <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} All Rights Reserved
-          </p>
-        </div>
-
-        <div className="mt-4  flex items-center justify-center md:mt-0">
-          <div className="flex space-x-8">
-            <Link
-              href="#"
-              className="text-sm text-muted-foreground hover:text-gray-600"
-            >
-              Terms
-            </Link>
-            <Link
-              href="#"
-              className="text-sm text-muted-foreground hover:text-gray-600"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="#"
-              className="text-sm text-muted-foreground hover:text-gray-600"
-            >
-              Cookie Policy
-            </Link>
-          </div>
-        </div>
       </div>
     </footer>
   );

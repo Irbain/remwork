@@ -4,11 +4,13 @@ import NewsLetters from "./components/sections/NewsLetters";
 import MaxWidthWrapper from "./components/MaxWidthWrapper";
 import TopSection from "./components/sections/TopSection";
 import { AccordionDemo } from "./components/sections/AccordionDemo";
+import Advantages from "./components/sections/Advantages";
 
 export default function Home() {
   return (
     <div>
       <TopSection />
+      <Advantages />
       <Divider />
 
       {/* <SettingsLayout>
