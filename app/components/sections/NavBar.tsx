@@ -75,7 +75,7 @@ const Navbar: React.FC<NavbarProps> = () => {
               {/* <div>{JSON.stringify(session)}</div> */}
             </div>
           ) : (
-            <div className="hidden sm:ml-6 sm:flex sm:items-center">
+            <div className="sm:ml-6 sm:flex sm:items-center">
               <Button
                 onClick={() => router.push("/login")}
                 variant="outline"

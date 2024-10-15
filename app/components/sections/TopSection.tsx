@@ -13,8 +13,8 @@ export default function TopSection() {
   return (
     <div className="bg-gradient-to-b from-[#FACC15]/10 to-background max-h-screen flex flex-col ">
       <main className="flex flex-col sm:flex-row justify-around container mx-auto lg:px-8 lg:py-12 ">
-        <div className="w-full flex-col self-center p-10">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-6 ">
+        <div className="w-full flex-col self-center p-6 pb-0 sm:p-10">
+          <h1 className="text-4xl sm:text-5xl font-bold mb-6">
             Find Your Dream Remote Job
           </h1>
           <p className="text-xl mb-8">
@@ -44,7 +44,13 @@ export default function TopSection() {
           </div>
         </div>
         <div className="w-full flex justify-center items-center">
-          <Image width={400} src={JobHunt} alt="find remote jobs" />
+          <Image
+            className="w-[400px] h-[200px] sm:w-[500px] sm:h-[500px]"
+            width={400}
+            height={400}
+            src={JobHunt}
+            alt="find remote jobs"
+          />
         </div>
       </main>
     </div>
