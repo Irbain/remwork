@@ -12,9 +12,9 @@ export default function TopSection() {
   const router = useRouter();
   return (
     <div className="bg-gradient-to-b from-[#FACC15]/10 to-background max-h-screen flex flex-col ">
-      <main className="flex justify-around container mx-auto px-4 py-12 ">
+      <main className="flex flex-col sm:flex-row justify-around container mx-auto lg:px-8 lg:py-12 ">
         <div className="w-full flex-col self-center p-10">
-          <h1 className="text-5xl font-bold mb-6">
+          <h1 className="text-4xl sm:text-5xl font-bold mb-6 ">
             Find Your Dream Remote Job
           </h1>
           <p className="text-xl mb-8">
