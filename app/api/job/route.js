@@ -7,11 +7,7 @@ export const GET = async () => {
   try {
     const jobs = await prisma.post.findMany();
 
-    return NextResponse.json(jobs, {
-      headers: {
-        "Access-Control-Allow-Origin": "*", // Adjust for your production domain
-      },
-    });
+    return NextResponse.json(jobs);
   } catch (err) {
     return NextResponse.json({ message: "GET Error", err }, { status: 500 });
   }
