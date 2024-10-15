@@ -10,10 +10,30 @@ import JobsHeader from "../components/sections/jobsHeader";
 import JobCard from "../components/JobCard";
 import { PaginationDemo } from "../components/shadcn/pagination/Pagination";
 import Combobox from "../components/shadcn/combobox/Combobox";
+import { getJobs } from "../components/_server/GetJobs";
+import { RotateCcw, Search } from "lucide-react";
+import { DurationBoxes } from "../components/shadcn/checkboxes/DurationBoxes";
+import { LevelBoxes } from "../components/shadcn/checkboxes/LevelBoxes";
 
-const Jobs = () => {
+interface Job {
+  id: number;
+  jobTitle: string;
+  companyName: string;
+  jobGeo: string;
+  jobExcerpt: string;
+  url: string;
+  companyLogo: string;
+  pubDate: string;
+}
+
+export default async function Jobs() {
+  const jobs = await getJobs();
+  if (!jobs) {
+    console.error(`Data is missing or empty: ${jobs}`);
+  }
+
   return (
-    <div>
+    <>
       <JobsHeader />
       <section className="h-full w-full flex px-[10%]">
         <aside className="w-1/3   h-full">
@@ -25,8 +45,10 @@ const Jobs = () => {
           </Accordion>
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem key={`Location`} value={`Location`}>
-              <AccordionTrigger>Experience</AccordionTrigger>
-              <AccordionContent>Eperience</AccordionContent>
+              <AccordionTrigger>Level</AccordionTrigger>
+              <AccordionContent>
+                <LevelBoxes />
+              </AccordionContent>
             </AccordionItem>
           </Accordion>
           <Accordion type="single" collapsible className="w-full">
@@ -37,27 +59,38 @@ const Jobs = () => {
               </AccordionContent>
             </AccordionItem>
           </Accordion>
-          <Button className="mt-3 w-4/5 ml-[10%]">Search</Button>
-          <Button variant="secondary" className="mt-3 w-4/5 ml-[10%]">
-            Clear
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem key={`Location`} value={`Location`}>
+              <AccordionTrigger>Duration</AccordionTrigger>
+              <AccordionContent>
+                <DurationBoxes />
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+          <Button type="submit" className="mt-3 w-4/5">
+            <Search size={15} className="mr-[5px]" /> Search
+          </Button>
+          <Button variant="secondary" className="mt-3 w-4/5">
+            <RotateCcw size={15} className="mr-[5px]" /> Clear
           </Button>
         </aside>
         <main className=" w-full h-full">
-          <JobCard
-            title="Ocuppation Title"
-            company="Companyname"
-            location="Amsterdam"
-            description="accumsan auctor felis, ornare mollis tellus cursus iaculis. Fusce lacinia arcu eros, eu interdum nibh rutrum non."
-            link="/profile"
-            logo="null"
-            date="2023-08-08"
-          />
+          {jobs.map((job: Job) => (
+            <JobCard
+              key={job.id}
+              title={job.jobTitle}
+              company={job.companyName}
+              location={job.jobGeo}
+              description={job.jobExcerpt}
+              link={job.url}
+              logo={job.companyLogo}
+              date={job.pubDate}
+            />
+          ))}
 
           <PaginationDemo />
         </main>
       </section>
-    </div>
+    </>
   );
-};
-
-export default Jobs;
+}

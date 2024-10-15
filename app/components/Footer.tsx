@@ -9,7 +9,7 @@ const Footer = () => {
   const pathsToMinimize = ["/verify-email", "/sign-up", "/sign-in"];
 
   return (
-    <footer className="bg-white flex-grow-0">
+    <footer className="bottom-0 bg-white flex-grow-0">
       <div className="border-t border-gray-200">
         {pathsToMinimize.includes(pathname) ? null : (
           <div className="pb-8 pt-16"></div>

@@ -1,0 +1,33 @@
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
+  }
+  
+  generator client {
+    provider = "prisma-client-js"
+  }
+  
+  model Post {
+    id  String @id @default(auto()) @map("_id") @db.ObjectId
+    jobId Int?
+    url String?
+    jobSlug String?
+    jobTitle String?
+    companyName String?
+    companyLogo String?
+    jobIndustry String[]
+    jobType String[]
+    jobGeo String?
+    jobLevel String?
+    jobExcerpt String?
+    jobDescription String?
+    pubDate String?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+  }
+  
+  // each time you update the schema 
+  // npx prisma generate
+  // npx prisma bd push

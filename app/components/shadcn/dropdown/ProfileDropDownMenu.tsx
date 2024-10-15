@@ -18,11 +18,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export function DropdownMenuDemo() {
   const { data: session } = useSession();
-  const router = useRouter();
 
   return (
     <DropdownMenu>
@@ -41,7 +40,7 @@ export function DropdownMenuDemo() {
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <User className="mr-2 h-4 w-4" />
-            <span onClick={() => router.push("/profile")}>Profile</span>
+            <Link href="/profile">Profile</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <MessageSquare className="mr-2 h-4 w-4" />
@@ -49,20 +48,18 @@ export function DropdownMenuDemo() {
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Settings className="mr-2 h-4 w-4" />
-            <span onClick={() => router.push("/settings/profile")}>
-              Settings
-            </span>
+            <Link href="/settings/profile">Settings</Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
 
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <LifeBuoy className="mr-2 h-4 w-4" />
-          <span onClick={() => router.push("/contact")}>Support</span>
+          <Link href="/contact">Support</Link>
         </DropdownMenuItem>
         <DropdownMenuItem disabled>
           <Cloud className="mr-2 h-4 w-4" />
-          <span onClick={() => router.push("/api")}>API</span>
+          <Link href="/docs">API</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>

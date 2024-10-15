@@ -19,32 +19,62 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-const frameworks = [
+const fields = [
   {
-    value: "next.js",
-    label: "Next.js",
+    value: "Software Engineering",
+    label: "Software Engineering",
   },
   {
-    value: "sveltekit",
-    label: "SvelteKit",
+    value: "Design & Creative",
+    label: "Design & Creative",
   },
   {
-    value: "nuxt.js",
-    label: "Nuxt.js",
+    value: "Finance & Legal",
+    label: "Finance & Legal",
   },
   {
-    value: "remix",
-    label: "Remix",
+    value: "Customer Success",
+    label: "Customer Success",
   },
   {
-    value: "astro",
-    label: "Astro",
+    value: "Marketing & Sales",
+    label: "Marketing & Sales",
+  },
+  {
+    value: "Sales",
+    label: "Sales",
+  },
+  {
+    value: "Product & Operations",
+    label: "Product & Operations",
+  },
+  {
+    value: "Copywriting & Content",
+    label: "Copywriting & Content",
+  },
+  {
+    value: "Web & App Design",
+    label: "Web & App Design",
+  },
+  {
+    value: "Business Development",
+    label: "Business Development",
+  },
+  {
+    value: "Data Science",
+    label: "Data Science",
+  },
+  {
+    value: "HR & Recruiting",
+    label: "HR & Recruiting",
   },
 ];
 
 export default function Combobox() {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
+
+  console.log(value);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -56,8 +86,8 @@ export default function Combobox() {
           className="w-[200px] justify-between"
         >
           {value
-            ? frameworks.find((framework) => framework.value === value)?.label
-            : "Select framework..."}
+            ? fields.find((field) => field.value === value)?.label
+            : "Select a field..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -65,12 +95,12 @@ export default function Combobox() {
         <Command>
           <CommandInput placeholder="Search framework..." />
           <CommandList>
-            <CommandEmpty>No framework found.</CommandEmpty>
+            <CommandEmpty>No filed found.</CommandEmpty>
             <CommandGroup>
-              {frameworks.map((framework) => (
+              {fields.map((field) => (
                 <CommandItem
-                  key={framework.value}
-                  value={framework.value}
+                  key={field.value}
+                  value={field.value}
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue);
                     setOpen(false);
@@ -79,10 +109,10 @@ export default function Combobox() {
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === framework.value ? "opacity-100" : "opacity-0"
+                      value === field.value ? "opacity-100" : "opacity-0"
                     )}
                   />
-                  {framework.label}
+                  {field.label}
                 </CommandItem>
               ))}
             </CommandGroup>

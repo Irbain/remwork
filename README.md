@@ -1,4 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Remote Jobs Offers Website
+
+This is a [Next.js](https://nextjs.org) project for a remote jobs offers website, bootstrapped with [create-next-app](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Tech Stack
+
+### Core Framework
+
+- [Next.js 14](https://nextjs.org/) - React framework for production
+- [React 18](https://reactjs.org/) - JavaScript library for building user interfaces
+
+### Database and ORM
+
+- [MongoDB](https://www.mongodb.com/) - NoSQL database
+- [Prisma](https://www.prisma.io/) - Next-generation ORM for Node.js and TypeScript
+
+### Authentication
+
+- [NextAuth.js](https://next-auth.js.org/) - Authentication for Next.js
+
+### UI and Styling
+
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [shadcn/ui](https://ui.shadcn.com/) - Re-usable components built with Radix UI and Tailwind CSS
+- [Lucide React](https://lucide.dev/) - Beautiful & consistent icon toolkit
+
+### Form Handling and Validation
+
+- [React Hook Form](https://react-hook-form.com/) - Performant, flexible and extensible forms
+- [Zod](https://github.com/colinhacks/zod) - TypeScript-first schema validation
+
+### Utilities
+
+- [clsx](https://github.com/lukeed/clsx) - Tiny utility for constructing className strings
+- [Day.js](https://day.js.org/) - Fast 2kB alternative to Moment.js
+- [he](https://github.com/mathiasbynens/he) - HTML entity encoder/decoder
+
+### API
+
+- REST API (built-in with Next.js API routes)
+
+### Development Tools
+
+- [ESLint](https://eslint.org/) - Pluggable JavaScript linter
+- [Prettier](https://prettier.io/) - Opinionated code formatter
 
 ## Getting Started
 
@@ -18,16 +62,26 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project uses [next/font](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a custom font family for Vercel.
+
+## Features
+
+- Browse remote job offers
+- Filter jobs by category, skills, and more
+- User authentication and profiles
+- Post new job offers (for employers)
+- Apply to jobs (for job seekers)
+- Responsive design for mobile and desktop
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about the technologies used in this project, check out the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [Prisma Documentation](https://www.prisma.io/docs/) - learn about Prisma ORM.
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs) - learn about Tailwind CSS.
+- [NextAuth.js Documentation](https://next-auth.js.org/getting-started/introduction) - learn about NextAuth.js.
 
 ## Deploy on Vercel
 
