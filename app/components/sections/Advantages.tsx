@@ -5,7 +5,7 @@ const Advantages = () => {
   return (
     <div>
       {" "}
-      <h1 className="text-center my-3 text-3xl text-main">
+      <h1 className="text-center my-3 text-3xl text-main bg-white">
         <b>Why Choose remwork?</b>
       </h1>
       <div className="grid md:grid-cols-3 gap-8 mb-12 mx-[3%]">
