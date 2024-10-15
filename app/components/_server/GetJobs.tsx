@@ -22,14 +22,14 @@
 const URL = process.env.NEXT_PUBLIC_URL;
 
 export const getJobs = async () => {
+  if (!URL) {
+    throw new Error("The NEXT_PUBLIC_URL environment variable is not defined.");
+  }
+
   const res = await fetch(`${URL}/api/job`);
 
-  //   await new Promise((resolve) => setTimeout(resolve, 3000));
-
   if (!res.ok) {
-    throw new Error("GetJob Failed !");
-  } else if (!URL) {
-    throw new Error("The next public URL is not here");
+    throw new Error(`GetJob Failed! Status: ${res.status}`);
   }
 
   return res.json();
