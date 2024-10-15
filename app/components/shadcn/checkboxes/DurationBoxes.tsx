@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useAccordionStore } from "@/app/utils/useStore";
 
 const elements = [
   {
@@ -23,26 +24,27 @@ const elements = [
 ];
 
 export function DurationBoxes() {
-  // Explicitly set the type to string[]
-  const [checkedItems, setCheckedItems] = useState<string[]>([]);
+  const { duration, setDuration } = useAccordionStore();
 
   const handleCheckboxChange = (id: string) => {
-    setCheckedItems((prevCheckedItems) =>
-      prevCheckedItems.includes(id)
-        ? prevCheckedItems.filter((item) => item !== id)
-        : [...prevCheckedItems, id]
+    setDuration(
+      duration.includes(id)
+        ? duration.filter((item) => item !== id)
+        : [...duration, id]
     );
-
-    // You can handle the updated checked items here (e.g., send it to an API)
-    console.log("Updated checked checkboxes:", checkedItems);
   };
+
+  useEffect(() => {
+    console.log("Updated checked checkboxes:", duration);
+  }, [duration]);
 
   return (
     <div>
       {elements.map((element) => (
-        <div key={element.id} className="flex items-center space-x-2 mb-2 ">
+        <div key={element.id} className="flex items-center space-x-2 mb-2">
           <Checkbox
             id={element.id}
+            checked={duration.includes(element.id)}
             onCheckedChange={() => handleCheckboxChange(element.id)}
             className="cursor-pointer select-none"
           />

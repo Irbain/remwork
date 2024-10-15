@@ -16,41 +16,49 @@ export const GET = async () => {
 export const POST = async (request) => {
   try {
     const body = await request.json();
-    const {
-      jobId,
-      url,
-      jobSlug,
-      jobTitle,
-      companyName,
-      companyLogo,
-      jobIndustry,
-      jobType,
-      jobGeo,
-      jobLevel,
-      jobExcerpt,
-      jobDescription,
-      pubDate,
-    } = body;
 
-    const newPost = await prisma.post.create({
-      data: {
-        jobId,
-        url,
-        jobSlug,
-        jobTitle,
-        companyName,
-        companyLogo,
-        jobIndustry,
-        jobType,
-        jobGeo,
-        jobLevel,
-        jobExcerpt,
-        jobDescription,
-        pubDate,
-      },
+    if (!Array.isArray(body)) {
+      return NextResponse.json(
+        { message: "Invalid data format, expected an array" },
+        { status: 400 }
+      );
+    }
+
+    const newPosts = await prisma.post.createMany({
+      data: body.map(
+        ({
+          jobId,
+          url,
+          jobSlug,
+          jobTitle,
+          companyName,
+          companyLogo,
+          jobIndustry,
+          jobType,
+          jobGeo,
+          jobLevel,
+          jobExcerpt,
+          jobDescription,
+          pubDate,
+        }) => ({
+          jobId,
+          url,
+          jobSlug,
+          jobTitle,
+          companyName,
+          companyLogo,
+          jobIndustry,
+          jobType,
+          jobGeo,
+          jobLevel,
+          jobExcerpt,
+          jobDescription,
+          pubDate,
+        })
+      ),
     });
 
-    return NextResponse.json(newPost);
+    return NextResponse.json(newPosts);
   } catch (err) {
     return NextResponse.json({ message: "POST Error", err }, { status: 500 });
   }

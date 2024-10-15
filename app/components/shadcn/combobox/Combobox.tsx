@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
-
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,63 +17,26 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useAccordionStore } from "@/app/utils/useStore";
 
 const fields = [
-  {
-    value: "Software Engineering",
-    label: "Software Engineering",
-  },
-  {
-    value: "Design & Creative",
-    label: "Design & Creative",
-  },
-  {
-    value: "Finance & Legal",
-    label: "Finance & Legal",
-  },
-  {
-    value: "Customer Success",
-    label: "Customer Success",
-  },
-  {
-    value: "Marketing & Sales",
-    label: "Marketing & Sales",
-  },
-  {
-    value: "Sales",
-    label: "Sales",
-  },
-  {
-    value: "Product & Operations",
-    label: "Product & Operations",
-  },
-  {
-    value: "Copywriting & Content",
-    label: "Copywriting & Content",
-  },
-  {
-    value: "Web & App Design",
-    label: "Web & App Design",
-  },
-  {
-    value: "Business Development",
-    label: "Business Development",
-  },
-  {
-    value: "Data Science",
-    label: "Data Science",
-  },
-  {
-    value: "HR & Recruiting",
-    label: "HR & Recruiting",
-  },
+  { value: "Software Engineering", label: "Software Engineering" },
+  { value: "Design & Creative", label: "Design & Creative" },
+  { value: "Finance & Legal", label: "Finance & Legal" },
+  { value: "Customer Success", label: "Customer Success" },
+  { value: "Marketing & Sales", label: "Marketing & Sales" },
+  { value: "Sales", label: "Sales" },
+  { value: "Product & Operations", label: "Product & Operations" },
+  { value: "Copywriting & Content", label: "Copywriting & Content" },
+  { value: "Web & App Design", label: "Web & App Design" },
+  { value: "Business Development", label: "Business Development" },
+  { value: "Data Science", label: "Data Science" },
+  { value: "HR & Recruiting", label: "HR & Recruiting" },
 ];
 
 export default function Combobox() {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
-
-  console.log(value);
+  const { field, setField } = useAccordionStore(); //TODO fix use state rerendering
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -83,36 +45,36 @@ export default function Combobox() {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-full justify-between"
         >
-          {value
-            ? fields.find((field) => field.value === value)?.label
+          {field
+            ? fields.find((f) => f.value === field)?.label
             : "Select a field..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-full p-0">
         <Command>
-          <CommandInput placeholder="Search framework..." />
+          <CommandInput placeholder="Search field..." />
           <CommandList>
-            <CommandEmpty>No filed found.</CommandEmpty>
+            <CommandEmpty>No field found.</CommandEmpty>
             <CommandGroup>
-              {fields.map((field) => (
+              {fields.map((f) => (
                 <CommandItem
-                  key={field.value}
-                  value={field.value}
+                  key={f.value}
+                  value={f.value}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue);
+                    setField(currentValue === field ? "" : currentValue);
                     setOpen(false);
                   }}
                 >
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === field.value ? "opacity-100" : "opacity-0"
+                      field === f.value ? "opacity-100" : "opacity-0"
                     )}
                   />
-                  {field.label}
+                  {f.label}
                 </CommandItem>
               ))}
             </CommandGroup>

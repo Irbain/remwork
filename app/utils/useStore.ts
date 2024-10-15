@@ -1,21 +1,25 @@
-// useStore.ts
 import { create } from "zustand";
 
-interface CheckboxStore {
-  checkedItems: string[];
-  toggleCheckbox: (id: string) => void;
-}
+type AccordionState = {
+  location: string;
+  level: string[];
+  field: string;
+  duration: string[];
+  setLocation: (location: string) => void;
+  setLevel: (level: string[]) => void;
+  setField: (field: string) => void;
+  setDuration: (duration: string[]) => void;
+  clearAll: () => void;
+};
 
-const useStore = create<CheckboxStore>((set) => ({
-  checkedItems: [],
-  toggleCheckbox: (id: string) =>
-    set((state) => {
-      const newCheckedItems = state.checkedItems.includes(id)
-        ? state.checkedItems.filter((item) => item !== id)
-        : [...state.checkedItems, id];
-
-      return { checkedItems: newCheckedItems };
-    }),
+export const useAccordionStore = create<AccordionState>((set) => ({
+  location: "",
+  level: [],
+  field: "",
+  duration: [],
+  setLocation: (location) => set({ location }),
+  setLevel: (level) => set({ level }),
+  setField: (field) => set({ field }),
+  setDuration: (duration) => set({ duration }),
+  clearAll: () => set({ location: "", level: [], field: "", duration: [] }),
 }));
-
-export default useStore;

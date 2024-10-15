@@ -18,8 +18,10 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useAccordionStore } from "@/app/utils/useStore";
 
 const countries = [
+  { value: "Anywhere", label: "Anywhere" },
   { value: "Afghanistan", label: "Afghanistan" },
   { value: "Albania", label: "Albania" },
   { value: "Algeria", label: "Algeria" },
@@ -222,9 +224,7 @@ const countries = [
 
 export default function LocationCombo() {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
-
-  console.log(value);
+  const { location, setLocation } = useAccordionStore();
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -235,8 +235,8 @@ export default function LocationCombo() {
           aria-expanded={open}
           className="w-[200px] justify-between"
         >
-          {value
-            ? countries.find((country) => country.value === value)?.label
+          {location
+            ? countries.find((country) => country.value === location)?.label
             : "Select a country..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -252,14 +252,14 @@ export default function LocationCombo() {
                   key={country.value}
                   value={country.value}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue);
+                    setLocation(currentValue === location ? "" : currentValue);
                     setOpen(false);
                   }}
                 >
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === country.value ? "opacity-100" : "opacity-0"
+                      location === country.value ? "opacity-100" : "opacity-0"
                     )}
                   />
                   {country.label}

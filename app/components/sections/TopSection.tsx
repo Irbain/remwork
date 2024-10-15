@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -5,8 +6,10 @@ import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import JobHunt from "@/public/job_hunt.svg";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function TopSection() {
+  const router = useRouter();
   return (
     <div className="bg-gradient-to-b from-[#FACC15]/10 to-background max-h-screen flex flex-col ">
       <main className="flex justify-around container mx-auto px-4 py-12 ">
@@ -30,7 +33,12 @@ export default function TopSection() {
                 size={20}
               />
             </div>
-            <Button className="bg-[#FACC15] text-black hover:bg-[#FACC15]/90">
+            <Button
+              onClick={() => {
+                router.push("/jobs");
+              }}
+              className="bg-[#FACC15] text-black hover:bg-[#FACC15]/90"
+            >
               Search
             </Button>
           </div>
