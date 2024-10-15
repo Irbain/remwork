@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -27,17 +29,33 @@ interface Job {
   pubDate: string;
 }
 
-export default async function Jobs() {
-  const jobs = await getJobs();
-  if (!jobs) {
-    console.error(`Data is missing or empty: ${jobs}`);
+export default function Jobs() {
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      const fetchedJobs = await getJobs();
+      if (!fetchedJobs || fetchedJobs.length === 0) {
+        console.error(`Data is missing or empty: ${fetchedJobs}`);
+      } else {
+        setJobs(fetchedJobs);
+      }
+      setLoading(false);
+    };
+
+    fetchJobs();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
   return (
     <>
       <JobsHeader />
       <section className="h-full w-full flex px-[10%]">
-        <aside className="w-1/3   h-full">
+        <aside className="w-1/3 h-full">
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem key={`Location`} value={`Location`}>
               <AccordionTrigger>Location</AccordionTrigger>
@@ -47,7 +65,7 @@ export default async function Jobs() {
             </AccordionItem>
           </Accordion>
           <Accordion type="single" collapsible className="w-full">
-            <AccordionItem key={`Location`} value={`Location`}>
+            <AccordionItem key={`Level`} value={`Level`}>
               <AccordionTrigger>Level</AccordionTrigger>
               <AccordionContent>
                 <LevelBoxes />
@@ -55,7 +73,7 @@ export default async function Jobs() {
             </AccordionItem>
           </Accordion>
           <Accordion type="single" collapsible className="w-full">
-            <AccordionItem key={`Location`} value={`Location`}>
+            <AccordionItem key={`Field`} value={`Field`}>
               <AccordionTrigger>Field</AccordionTrigger>
               <AccordionContent>
                 <Combobox />
@@ -63,7 +81,7 @@ export default async function Jobs() {
             </AccordionItem>
           </Accordion>
           <Accordion type="single" collapsible className="w-full">
-            <AccordionItem key={`Location`} value={`Location`}>
+            <AccordionItem key={`Duration`} value={`Duration`}>
               <AccordionTrigger>Duration</AccordionTrigger>
               <AccordionContent>
                 <DurationBoxes />
@@ -77,19 +95,23 @@ export default async function Jobs() {
             <RotateCcw size={15} className="mr-[5px]" /> Clear
           </Button>
         </aside>
-        <main className=" w-full h-full">
-          {jobs.map((job: Job) => (
-            <JobCard
-              key={job.id}
-              title={job.jobTitle}
-              company={job.companyName}
-              location={job.jobGeo}
-              description={job.jobExcerpt}
-              link={job.url}
-              logo={job.companyLogo}
-              date={job.pubDate}
-            />
-          ))}
+        <main className="w-full h-full">
+          {jobs.length > 0 ? (
+            jobs.map((job: Job) => (
+              <JobCard
+                key={job.id}
+                title={job.jobTitle}
+                company={job.companyName}
+                location={job.jobGeo}
+                description={job.jobExcerpt}
+                link={job.url}
+                logo={job.companyLogo}
+                date={job.pubDate}
+              />
+            ))
+          ) : (
+            <p>No jobs available</p>
+          )}
 
           <PaginationDemo />
         </main>
