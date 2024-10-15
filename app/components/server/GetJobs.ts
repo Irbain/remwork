@@ -19,7 +19,7 @@
 //   return console.log("result");
 // }
 
-const URL = process.env.NEXT_PUBLIC_URL;
+const URL = process.env.NEXT_PUBLIC_URL || "htts://remwork.org";
 
 export const getJobs = async () => {
   if (!URL) {

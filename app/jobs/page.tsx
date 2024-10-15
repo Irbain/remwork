@@ -10,7 +10,7 @@ import JobsHeader from "../components/sections/jobsHeader";
 import JobCard from "../components/JobCard";
 import { PaginationDemo } from "../components/shadcn/pagination/Pagination";
 import Combobox from "../components/shadcn/combobox/Combobox";
-import { getJobs } from "../components/_server/GetJobs";
+import { getJobs } from "../components/server/GetJobs";
 import { RotateCcw, Search } from "lucide-react";
 import { DurationBoxes } from "../components/shadcn/checkboxes/DurationBoxes";
 import { LevelBoxes } from "../components/shadcn/checkboxes/LevelBoxes";
