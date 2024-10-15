@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Cloud,
   LifeBuoy,
@@ -18,10 +20,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export function DropdownMenuDemo() {
   const { data: session } = useSession();
+
+  const router = useRouter();
 
   return (
     <DropdownMenu>
@@ -38,39 +42,37 @@ export function DropdownMenuDemo() {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={() => router.push("/profile")}>
             <User className="mr-2 h-4 w-4" />
-            <Link href="/profile">Profile</Link>
+            <span>Profile</span>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={() => router.push("/mail")}>
             <MessageSquare className="mr-2 h-4 w-4" />
             <span>Messages</span>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={() => router.push("/settings/profile")}>
             <Settings className="mr-2 h-4 w-4" />
-            <Link href="/settings/profile">Settings</Link>
+            <span>Settings</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
 
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={() => router.push("/contact")}>
           <LifeBuoy className="mr-2 h-4 w-4" />
-          <Link href="/contact">Support</Link>
+          <span>Support</span>
         </DropdownMenuItem>
         <DropdownMenuItem disabled>
           <Cloud className="mr-2 h-4 w-4" />
-          <Link href="/docs">API</Link>
+          <span>API</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => {
+            signOut({ callbackUrl: `/` });
+          }}
+        >
           <LogOut className="mr-2 h-4 w-4" />
-          <span
-            onClick={() => {
-              signOut({ callbackUrl: `/` });
-            }}
-          >
-            Log out
-          </span>
+          <span>Log out</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

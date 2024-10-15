@@ -14,6 +14,7 @@ import { getJobs } from "../components/_server/GetJobs";
 import { RotateCcw, Search } from "lucide-react";
 import { DurationBoxes } from "../components/shadcn/checkboxes/DurationBoxes";
 import { LevelBoxes } from "../components/shadcn/checkboxes/LevelBoxes";
+import LocationCombo from "../components/shadcn/combobox/LocationCombo";
 
 interface Job {
   id: number;
@@ -40,7 +41,9 @@ export default async function Jobs() {
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem key={`Location`} value={`Location`}>
               <AccordionTrigger>Location</AccordionTrigger>
-              <AccordionContent>Location</AccordionContent>
+              <AccordionContent>
+                <LocationCombo />
+              </AccordionContent>
             </AccordionItem>
           </Accordion>
           <Accordion type="single" collapsible className="w-full">

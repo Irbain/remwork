@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Clock, Heart, MapPin, Send } from "lucide-react";
 import Link from "next/link";
@@ -6,6 +7,7 @@ import dayjs from "dayjs";
 import Image from "next/image";
 import he from "he";
 import alternativeLogo from "@/public/companylogo.jpg";
+import { useRouter } from "next/navigation";
 
 interface Props {
   title: string;
@@ -37,6 +39,8 @@ const JobCard = ({
     }
     return description;
   };
+
+  const router = useRouter();
 
   return (
     <div className="hover:shadow-lg w-ful border-b-[1px] border-gray-100">
@@ -76,7 +80,12 @@ const JobCard = ({
         </div>
         {/* Actions */}
         <div className="flex basis-1/4 flex-col items-center">
-          <Button className="w-full">
+          <Button
+            onClick={() => {
+              router.push(link);
+            }}
+            className="w-full"
+          >
             {" "}
             <Send size={15} className="mr-[5px]" /> Apply Now
           </Button>
