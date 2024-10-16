@@ -32,7 +32,8 @@ interface Job {
   url: string;
   companyLogo: string;
   pubDate: string;
-  jobType: string; // Adding jobType to support duration filtering
+  jobType: string[];
+  jobLevel: string; // Adding jobType to support duration filtering
 }
 
 export default function Jobs() {
@@ -52,8 +53,8 @@ export default function Jobs() {
       }
       setLoading(false);
     };
-
     fetchJobs();
+    console.log(jobs, "here is jobs");
   }, []);
 
   // Filter jobs based on Zustand store preferences
@@ -64,9 +65,11 @@ export default function Jobs() {
         ? job.jobTitle.toLowerCase().includes(field.toLowerCase())
         : true;
       const matchesDuration = duration.length
-        ? duration.includes(job.jobType)
+        ? job.jobType.some((type) => duration.includes(type))
         : true;
-      const matchesLevel = level.length ? level.includes(job.jobType) : true; // Assuming jobType refers to level
+
+      // Level Filter (jobLevel)
+      const matchesLevel = level.length ? level.includes(job.jobLevel) : true;
 
       return matchesLocation && matchesField && matchesDuration && matchesLevel;
     });

@@ -20,18 +20,18 @@ import {
 import { useAccordionStore } from "@/app/utils/useStore";
 
 const fields = [
-  { value: "Software Engineering", label: "Software Engineering" },
-  { value: "Design & Creative", label: "Design & Creative" },
-  { value: "Finance & Legal", label: "Finance & Legal" },
-  { value: "Customer Success", label: "Customer Success" },
-  { value: "Marketing & Sales", label: "Marketing & Sales" },
+  { value: "Engineering", label: "Software Engineering" },
+  { value: "Design", label: "Design & Creative" },
+  { value: "Finance", label: "Finance & Legal" },
+  { value: "Customer", label: "Customer Success" },
+  { value: "Marketing", label: "Marketing & Sales" },
   { value: "Sales", label: "Sales" },
-  { value: "Product & Operations", label: "Product & Operations" },
-  { value: "Copywriting & Content", label: "Copywriting & Content" },
-  { value: "Web & App Design", label: "Web & App Design" },
-  { value: "Business Development", label: "Business Development" },
-  { value: "Data Science", label: "Data Science" },
-  { value: "HR & Recruiting", label: "HR & Recruiting" },
+  { value: "Product", label: "Product & Operations" },
+  { value: "Copywriting", label: "Copywriting & Content" },
+  { value: "Web", label: "Web & App Design" },
+  { value: "Business", label: "Business Development" },
+  { value: "Data", label: "Data Science" },
+  { value: "Human", label: "HR & Recruiting" },
 ];
 
 export default function Combobox() {
