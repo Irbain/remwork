@@ -7,7 +7,6 @@ import dayjs from "dayjs";
 import Image from "next/image";
 import he from "he";
 import alternativeLogo from "@/public/companylogo.jpg";
-import { useRouter } from "next/navigation";
 
 interface Props {
   title: string;
@@ -39,8 +38,6 @@ const JobCard = ({
     }
     return description;
   };
-
-  const router = useRouter();
 
   return (
     <div className="hover:shadow-lg w-ful border-b-[1px] border-gray-100">
