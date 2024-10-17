@@ -96,8 +96,8 @@ export default function Jobs() {
   return (
     <>
       <JobsHeader />
-      <section className="h-full w-full flex px-[10%]">
-        <aside className="w-1/3 h-full">
+      <section className="h-full w-full flex flex-col sm:flex-row px-[3%] sm:px-[10%] ">
+        <aside className="w-full sm:w-1/3 h-full">
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem key="Location" value="Location">
               <AccordionTrigger>Location</AccordionTrigger>
@@ -130,18 +130,21 @@ export default function Jobs() {
               </AccordionContent>
             </AccordionItem>
           </Accordion>
-          <Button type="button" className="mt-3 w-4/5" onClick={handleFilter}>
+          <Button type="button" className=" mt-3 w-4/5" onClick={handleFilter}>
             <Search size={15} className="mr-[5px]" /> Search
           </Button>
           <Button
             variant="secondary"
-            className="mt-3 w-4/5"
+            className=" mt-3 w-4/5"
             onClick={handleClear}
           >
             <RotateCcw size={15} className="mr-[5px]" /> Clear
           </Button>
         </aside>
         <main className="w-full h-full">
+          <div className="text-gray text-start pl-[6%] mt-4">
+            <b>{filteredJobs ? filteredJobs.length + " Jobs Found" : ""}</b>
+          </div>
           {filteredJobs.length > 0 ? (
             filteredJobs.map((job: Job) => (
               <JobCard

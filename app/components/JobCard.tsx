@@ -73,7 +73,12 @@ const JobCard = ({
             </span>
             <br />
             {truncateDescription(he.decode(description), 180)} <br />
-            <Link className="text-main" href={link}>
+            <Link
+              className="text-main"
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Read More..
             </Link>
           </p>
@@ -82,7 +87,7 @@ const JobCard = ({
         <div className="flex basis-1/4 flex-col items-center">
           <Button
             onClick={() => {
-              router.push(link);
+              window.open(link, "_blank");
             }}
             className="w-full"
           >
