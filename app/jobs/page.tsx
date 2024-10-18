@@ -169,18 +169,28 @@ export default function Jobs() {
             />
           </div>
           {filteredJobs.length > 0 ? (
-            filteredJobs.map((job: Job) => (
-              <JobCard
-                key={job.id}
-                title={job.jobTitle}
-                company={job.companyName}
-                location={job.jobGeo}
-                description={job.jobExcerpt}
-                link={job.url}
-                logo={job.companyLogo}
-                date={job.pubDate}
-              />
-            ))
+            filteredJobs
+              .sort(
+                (a, b) =>
+                  new Date(
+                    posted === "Newest" ? b.pubDate : a.pubDate
+                  ).getTime() -
+                  new Date(
+                    posted === "Newest" ? a.pubDate : b.pubDate
+                  ).getTime()
+              )
+              .map((job: Job) => (
+                <JobCard
+                  key={job.id}
+                  title={job.jobTitle}
+                  company={job.companyName}
+                  location={job.jobGeo}
+                  description={job.jobExcerpt}
+                  link={job.url}
+                  logo={job.companyLogo}
+                  date={job.pubDate}
+                />
+              ))
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-center m-[10%]">
               <h1 className="text-2xl mb-5 ">
