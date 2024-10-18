@@ -1,12 +1,9 @@
-// http://localhost:3000/api/job
-
 import prisma from "@/app/utils/prismadb";
 import { NextResponse } from "next/server";
 
 export const GET = async () => {
   try {
     const jobs = await prisma.post.findMany();
-
     return NextResponse.json(jobs);
   } catch (err) {
     return NextResponse.json({ message: "GET Error", err }, { status: 500 });
@@ -58,8 +55,12 @@ export const POST = async (request) => {
       ),
     });
 
-    return NextResponse.json(newPosts);
+    return NextResponse.json({ message: "Jobs posted successfully", newPosts });
   } catch (err) {
-    return NextResponse.json({ message: "POST Error", err }, { status: 500 });
+    console.error("POST Error details:", err); // Log the full error details
+    return NextResponse.json(
+      { message: "POST Error", error: err.message },
+      { status: 500 }
+    );
   }
 };

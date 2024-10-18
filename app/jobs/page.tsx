@@ -14,7 +14,7 @@ import JobCard from "../components/JobCard";
 import { PaginationDemo } from "../components/shadcn/pagination/Pagination";
 import Combobox from "../components/shadcn/combobox/Combobox";
 import { getJobs } from "../components/server/GetJobs";
-import { Loader2, RotateCcw, Search } from "lucide-react";
+import { ListFilter, Loader2, RotateCcw, Search } from "lucide-react";
 import { DurationBoxes } from "../components/shadcn/checkboxes/DurationBoxes";
 import { LevelBoxes } from "../components/shadcn/checkboxes/LevelBoxes";
 import LocationCombo from "../components/shadcn/combobox/LocationCombo";
@@ -22,6 +22,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useAccordionStore } from "../utils/useStore";
 import NotFound from "@/public/undraw_not_foundd.svg";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 interface Job {
   id: number;
@@ -40,6 +41,7 @@ export default function Jobs() {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
+  const [posted, setPosted] = useState("Newest");
   const { location, level, field, duration, clearAll } = useAccordionStore();
 
   useEffect(() => {
@@ -142,8 +144,29 @@ export default function Jobs() {
           </Button>
         </aside>
         <main className="w-full h-full">
-          <div className="text-gray text-start pl-[6%] mt-4">
-            <b>{filteredJobs ? filteredJobs.length + " Jobs Found" : ""}</b>
+          <div className="flex justify-between items-center px-[1rem]">
+            <div className="text-gray-600 text-start pl-[3%] mt-4 ">
+              <b>
+                {filteredJobs && filteredJobs.length > 0
+                  ? filteredJobs.length + " Jobs Found"
+                  : ""}
+              </b>
+            </div>
+
+            <ListFilter
+              className={cn(
+                posted === "Newest" ? "rotate-0" : "rotate-180 ",
+                "text-gray-600 cursor-pointer select-none"
+              )}
+              onClick={() => {
+                // Call setPosted only when the button is clicked
+                if (posted === "Newest") {
+                  setPosted("Lastest");
+                } else {
+                  setPosted("Newest");
+                }
+              }}
+            />
           </div>
           {filteredJobs.length > 0 ? (
             filteredJobs.map((job: Job) => (
@@ -173,7 +196,7 @@ export default function Jobs() {
             </div>
           )}
 
-          <PaginationDemo />
+          {filteredJobs.length > 10 ? <PaginationDemo /> : ""}
         </main>
       </section>
     </>

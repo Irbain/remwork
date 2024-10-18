@@ -11,7 +11,7 @@ datasource db {
   
   model Post {
     id  String @id @default(auto()) @map("_id") @db.ObjectId
-    jobId Int?
+    jobId Int? @unique
     url String?
     jobSlug String?
     jobTitle String?

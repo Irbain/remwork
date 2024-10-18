@@ -40,7 +40,7 @@ const JobCard = ({
   };
 
   return (
-    <div className="hover:shadow-lg w-ful border-b-[1px] border-gray-100">
+    <div className="hover:shadow-lg w-full border-b-[1px] border-gray-100">
       <div className="flex justify-around w-full px-[1rem] py-[1rem] ">
         {/* Picture */}
         <div className=" basis-1/6">

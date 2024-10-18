@@ -2,27 +2,46 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import Test from "./Testing";
+import GetJobsFromAPI from "./GetJobsFromAPI";
+import { PostJobs } from "../components/server/PostJobs";
+import { Input } from "@/components/ui/input";
 
 export default function AdminDashboard() {
   const [lastTime, setLastTime] = useState<string | undefined>();
   const [data, setData] = useState(null);
 
   const handleClick = async () => {
-    const updatedJobs = await Test();
+    const updatedJobs = await GetJobsFromAPI();
     setData(updatedJobs);
   };
 
-  // useEffect to log `data` after it updates
   useEffect(() => {
     if (data) {
-      console.log("this is the final result", data);
     }
   }, [data]);
 
   return (
     <div className="h-screen flex flex-col justify-center items-center">
-      <Button className="mt-4"> Post Request </Button>
+      <Button
+        className="mt-4"
+        onClick={async () => {
+          const result = await PostJobs(data);
+          console.log("Post Request result:", result);
+        }}
+      >
+        {" "}
+        Post Request{" "}
+      </Button>
+
+      <Button
+        className="mt-4"
+        onClick={() => {
+          //delete 177661
+          // get id and take mondodb i d to delete
+        }}
+      >
+        Delete
+      </Button>
       <Button className="mt-4" variant="secondary">
         Clean
       </Button>
@@ -37,7 +56,8 @@ export default function AdminDashboard() {
           Fetch API
         </Button>
         {lastTime}
-        {data && <div>Data: {JSON.stringify(data)}</div>}
+        {data && "done"}
+        {/* <div>Data: {JSON.stringify(data)}</div> */}
       </div>
     </div>
   );

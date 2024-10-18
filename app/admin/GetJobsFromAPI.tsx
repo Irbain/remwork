@@ -1,4 +1,4 @@
-export default async function Test() {
+export default async function GetJobsFromAPI() {
   const url = "https://jobicy.p.rapidapi.com/api/v2/remote-jobs";
   const options = {
     method: "GET",
