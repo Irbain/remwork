@@ -1,5 +1,4 @@
-// app/_server/PostJobs.ts
-export const PostJobs = async (jobs) => {
+export const PostJobs = async (jobs: unknown) => {
   try {
     const response = await fetch("/api/job", {
       method: "POST",
@@ -16,8 +15,15 @@ export const PostJobs = async (jobs) => {
     }
 
     return result;
-  } catch (err) {
+  } catch (err: unknown) {
     console.error("Error posting jobs:", err);
-    return { error: err.message };
+
+    // Check if err is an instance of Error before accessing 'message'
+    if (err instanceof Error) {
+      return { error: err.message };
+    }
+
+    // If err is not an instance of Error, return a generic error message
+    return { error: "An unknown error occurred." };
   }
 };
