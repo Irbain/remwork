@@ -11,7 +11,6 @@ import {
 import { Button } from "@/components/ui/button";
 import JobsHeader from "../components/sections/jobsHeader";
 import JobCard from "../components/JobCard";
-import { PaginationDemo } from "../components/shadcn/pagination/Pagination";
 import Combobox from "../components/shadcn/combobox/Combobox";
 import { getJobs } from "../components/server/GetJobs";
 import { ListFilter, Loader2, RotateCcw, Search } from "lucide-react";
@@ -23,6 +22,13 @@ import { useAccordionStore } from "../utils/useStore";
 import NotFound from "@/public/undraw_not_foundd.svg";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 interface Job {
   id: number;
@@ -42,6 +48,12 @@ export default function Jobs() {
   const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
   const [posted, setPosted] = useState("Newest");
+  const [currentPage, setCurrentPAge] = useState(1);
+  const [postsPerPage] = useState(10);
+
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+
   const { location, level, field, duration, clearAll } = useAccordionStore();
 
   useEffect(() => {
@@ -56,7 +68,6 @@ export default function Jobs() {
       setLoading(false);
     };
     fetchJobs();
-    console.log(jobs, "here is jobs");
   }, []);
 
   // Filter jobs based on Zustand store preferences
@@ -94,6 +105,14 @@ export default function Jobs() {
       </Card>
     );
   }
+
+  // Function to update the current page when pagination changes
+  const decrementPage = () => {
+    if (currentPage > 1) {
+      setCurrentPAge(currentPage - 1);
+    }
+    return null;
+  };
 
   return (
     <>
@@ -179,6 +198,7 @@ export default function Jobs() {
                     posted === "Newest" ? a.pubDate : b.pubDate
                   ).getTime()
               )
+              .slice(firstPostIndex, lastPostIndex)
               .map((job: Job) => (
                 <JobCard
                   key={job.id}
@@ -206,7 +226,42 @@ export default function Jobs() {
             </div>
           )}
 
-          {filteredJobs.length > 10 ? <PaginationDemo /> : ""}
+          {filteredJobs.length > 10 ? (
+            <Pagination className="my-4">
+              <PaginationContent>
+                {/* PREVIOUS */}
+                <PaginationItem>
+                  <PaginationPrevious
+                    className="select-none cursor-pointer"
+                    //  href="#"
+                    onClick={decrementPage}
+                  />
+                </PaginationItem>
+                {/* <PaginationItem>
+                    <PaginationLink>{currentPage - 1}</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink isActive>{currentPage}</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink>{currentPage + 1}</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationEllipsis />
+                  </PaginationItem> */}
+                {/* NEXT */}
+                <PaginationItem>
+                  <PaginationNext
+                    className="select-none cursor-pointer"
+                    //  href="#"
+                    onClick={() => setCurrentPAge(currentPage + 1)}
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          ) : (
+            ""
+          )}
         </main>
       </section>
     </>

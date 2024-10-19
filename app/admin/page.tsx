@@ -5,20 +5,9 @@ import { Button } from "@/components/ui/button";
 import GetJobsFromAPI from "./GetJobsFromAPI";
 import { PostJobs } from "../components/server/PostJobs";
 
-type Job = {
-  id: string;
-  jobTitle: string;
-  companyName: string;
-  jobGeo: string;
-  jobExcerpt: string;
-  url: string;
-  companyLogo?: string;
-  pubDate: string;
-};
-
 export default function AdminDashboard() {
   const [lastTime, setLastTime] = useState<string | undefined>();
-  const [data, setData] = useState<Job[] | null>(null);
+  const [data, setData] = useState();
 
   const handleClick = async () => {
     const updatedJobs = await GetJobsFromAPI();
