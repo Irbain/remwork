@@ -59,10 +59,10 @@ const Navbar: React.FC<NavbarProps> = () => {
             <div className="flex ">
               <div
                 onClick={() => router.push("/profile")}
-                className="mr-3
+                className="mr-2
                 cursor-pointer text-black  hover:text-[#FACC15] inline-flex items-center px-1 pt-1 text-sm font-medium transition-colors duration-200"
               >
-                {session.user?.name}
+                <b>{session.user?.name}</b>
               </div>
               <DropdownMenuDemo />
               {/* <Image

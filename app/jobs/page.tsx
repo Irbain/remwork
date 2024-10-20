@@ -232,7 +232,10 @@ export default function Jobs() {
                 {/* PREVIOUS */}
                 <PaginationItem>
                   <PaginationPrevious
-                    className="select-none cursor-pointer"
+                    className={cn(
+                      currentPage === 1 ? "text-gray-400" : "",
+                      "select-none cursor-pointer"
+                    )}
                     //  href="#"
                     onClick={decrementPage}
                   />
