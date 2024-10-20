@@ -22,8 +22,9 @@ export default function AdminDashboard() {
   const [jobs, setJobs] = useState<[]>([]);
   const [toDelete, setToDelete] = useState<unknown>();
   const [extractedId, setExtractedId] = useState<string | number>();
-
-  const handleClick = async () => {
+  const [duplicated, setDuplicated] = useState<[]>([]);
+  // Called from Jobicy API
+  const FetchFromJobicy = async () => {
     const updatedJobs = await GetJobsFromAPI();
     setData(updatedJobs);
   };
@@ -38,7 +39,8 @@ export default function AdminDashboard() {
       if (!fetchedJobs || fetchedJobs.length === 0) {
         console.error(`Data is missing or empty: ${fetchedJobs}`);
       } else {
-        setJobs(fetchedJobs);
+        setJobs(fetchedJobs); // GET api/job
+        detectDuplication(fetchedJobs);
       }
     };
     fetchJobs();
@@ -48,6 +50,27 @@ export default function AdminDashboard() {
     if (data) {
     }
   }, [data]);
+
+  const detectDuplication = (jobs: Job[]): void => {
+    // Step 1: Find jobIds that are null or duplicated
+    const jobIdCount: { [key: string]: number } = jobs.reduce((acc, job) => {
+      const { jobId } = job;
+      if (jobId !== null) {
+        acc[jobId] = (acc[jobId] || 0) + 1;
+      }
+      return acc;
+    }, {} as { [key: string]: number });
+
+    // Step 2: Collect the ids where jobId is duplicated or null
+
+    const duplicateOrNullIds: number[] | undefined = jobs
+      .filter((job) => job.jobId === null || jobIdCount[job.jobId!] > 1)
+      .map((job) => job.id);
+
+    // @ts-expect-error bellow
+    setDuplicated(duplicateOrNullIds);
+    console.log(duplicateOrNullIds, "duplicated");
+  };
 
   const extractJobId = (jobs: Job[]) => {
     const job = jobs.find((job) => job.jobId === parseInt(toDelete as string));
@@ -59,23 +82,19 @@ export default function AdminDashboard() {
     }
   };
 
+  const deleteDuplicated = (data: []) => {
+    data.forEach((id: string | number) => {
+      DeleteJobById(id);
+      console.log(id, " deleted");
+    });
+  };
+
   return (
     <div>
       {session?.user?.email === "contact@irbaine.com" ||
       "amine011eminos@gmail.com" ? (
         <div>
           <div className="h-screen flex flex-col justify-center items-center">
-            <Button
-              className="mt-4"
-              onClick={async () => {
-                const result = await PostJobs(data);
-                console.log("Post Request result:", result);
-              }}
-            >
-              {" "}
-              Post Request{" "}
-            </Button>
-
             <div className="flex justify-center mt-4">
               <Input
                 className="max-w-[140px] mr-6 "
@@ -86,9 +105,6 @@ export default function AdminDashboard() {
               <Button
                 className=""
                 onClick={() => {
-                  //delete 177661
-
-                  // get id and take mondodb i d to delete
                   extractJobId(jobs);
                   DeleteJobById(extractedId);
                 }}
@@ -96,7 +112,13 @@ export default function AdminDashboard() {
                 Delete
               </Button>
             </div>
-            <Button className="mt-4" variant="secondary">
+            <Button
+              className="mt-4"
+              variant="secondary"
+              onClick={() => {
+                deleteDuplicated(duplicated);
+              }}
+            >
               Clean
             </Button>
             <div className="flex flex-col items-center">
@@ -104,14 +126,23 @@ export default function AdminDashboard() {
                 className="mt-4 max-w-[150px]"
                 onClick={() => {
                   setLastTime(new Date().toString());
-                  handleClick(); // Call both functions
+                  FetchFromJobicy(); // Call both functions
                 }}
               >
                 Fetch Jobicy API
               </Button>
               {lastTime}
-              {data && "done"}
               {/* <div>Data: {JSON.stringify(data)}</div> */}
+              <Button
+                className="mt-4"
+                onClick={async () => {
+                  const result = await PostJobs(data);
+                  console.log("Post Request result:", result);
+                }}
+              >
+                {" "}
+                Post Request{" "}
+              </Button>
             </div>
           </div>
         </div>
