@@ -9,16 +9,16 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import JobsHeader from "../components/sections/jobsHeader";
-import JobCard from "../components/JobCard";
-import Combobox from "../components/shadcn/combobox/Combobox";
-import { getJobs } from "../components/server/GetJobs";
+import JobsHeader from "../../components/sections/jobsHeader";
+import JobCard from "../../components/JobCard";
+import Combobox from "../../components/shadcn/combobox/Combobox";
+import { getJobs } from "../../components/server/GetJobs";
 import { ListFilter, Loader2, RotateCcw, Search } from "lucide-react";
-import { DurationBoxes } from "../components/shadcn/checkboxes/DurationBoxes";
-import { LevelBoxes } from "../components/shadcn/checkboxes/LevelBoxes";
-import LocationCombo from "../components/shadcn/combobox/LocationCombo";
+import { DurationBoxes } from "../../components/shadcn/checkboxes/DurationBoxes";
+import { LevelBoxes } from "../../components/shadcn/checkboxes/LevelBoxes";
+import LocationCombo from "../../components/shadcn/combobox/LocationCombo";
 import { Card, CardContent } from "@/components/ui/card";
-import { useAccordionStore } from "../utils/useStore";
+import { useAccordionStore } from "../utils/useJobStore";
 import NotFound from "@/public/undraw_not_foundd.svg";
 import Image from "next/image";
 import { cn } from "@/lib/utils";

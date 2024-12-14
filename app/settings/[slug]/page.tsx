@@ -1,13 +1,12 @@
-import SettingsAccountPage from "@/app/components/shadcn/forms/account/page";
-import SettingsAppearancePage from "@/app/components/shadcn/forms/appearance/page";
-import SettingsDisplayPage from "@/app/components/shadcn/forms/display/page";
-import SettingsLayout from "@/app/components/shadcn/forms/layout";
-import SettingsNotificationsPage from "@/app/components/shadcn/forms/notifications/page";
-import SettingsProfilePage from "@/app/components/shadcn/forms/page";
+import SettingsAccountPage from "@/components/shadcn/forms/account/page";
+import SettingsAppearancePage from "@/components/shadcn/forms/appearance/page";
+import SettingsDisplayPage from "@/components/shadcn/forms/display/page";
+import SettingsLayout from "@/components/shadcn/forms/layout";
+import SettingsNotificationsPage from "@/components/shadcn/forms/notifications/page";
+import SettingsProfilePage from "@/components/shadcn/forms/page";
 import React from "react";
 
 const page = ({ params }: { params: { slug: string } }) => {
-  console.log("this is rout", params.slug);
   return (
     <SettingsLayout>
       {/* <ProfileForm />

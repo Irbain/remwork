@@ -1,6 +1,6 @@
 import React from "react";
-import SettingsLayout from "../components/shadcn/forms/layout";
-import { DisplayForm } from "../components/shadcn/forms/display/display-form";
+import SettingsLayout from "@/components/shadcn/forms/layout";
+import { DisplayForm } from "@/components/shadcn/forms/display/display-form";
 
 const page = () => {
   return (

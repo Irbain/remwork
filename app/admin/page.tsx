@@ -3,11 +3,14 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import GetJobsFromAPI from "./GetJobsFromAPI";
-import { PostJobs } from "../components/server/PostJobs";
-import { useSession } from "next-auth/react";
+import { PostJobs } from "../../components/server/PostJobs";
 import { Input } from "@/components/ui/input";
-import { getJobs } from "../components/server/GetJobs";
-import { DeleteJobById } from "../components/server/DeleteJob";
+import { getJobs } from "../../components/server/GetJobs";
+import { DeleteJobById } from "../../components/server/DeleteJob";
+import { RoleGate } from "@/components/auth/role-gate";
+import { UserRole } from "@prisma/client";
+import { toast } from "sonner";
+import { settings } from "@/actions/settings";
 
 interface Job {
   id: number;
@@ -18,7 +21,7 @@ interface Job {
 export default function AdminDashboard() {
   const [lastTime, setLastTime] = useState<string | undefined>();
   const [data, setData] = useState<[]>([]);
-  const { data: session } = useSession();
+
   const [jobs, setJobs] = useState<[]>([]);
   const [toDelete, setToDelete] = useState<unknown>();
   const [extractedId, setExtractedId] = useState<string | number>();
@@ -89,10 +92,35 @@ export default function AdminDashboard() {
     });
   };
 
+  //const role = useCurrentRole();
+
+  const onClick = () => {
+    settings({
+      name: "Eminox",
+    });
+  };
+
+  const onApiRouteClick = () => {
+    fetch("/api/admin").then((response) => {
+      if (response.ok) {
+        console.log("Allowed");
+      } else {
+        console.log("Forbidden");
+      }
+    });
+  };
   return (
     <div>
-      {session?.user?.email === "contact@irbaine.com" ||
-      "amine011eminos@gmail.com" ? (
+      <div className="flex flex-center items-center justify-center w-full bg-blue-500 text-white">
+        <p>Admin-only API route</p>
+        <Button onClick={onApiRouteClick}>Click to test</Button>
+      </div>
+      <div className="flex flex-center items-center justify-center w-full bg-blue-500 text-white">
+        <p>Admin-only Server Action</p>
+        <Button>Click to test</Button>
+      </div>
+      {/* <Button onClick={onClick}>Click me</Button> */}
+      <RoleGate allowedRole={UserRole.ADMIN}>
         <div>
           <div className="h-screen flex flex-col justify-center items-center">
             <div className="flex justify-center mt-4">
@@ -146,9 +174,7 @@ export default function AdminDashboard() {
             </div>
           </div>
         </div>
-      ) : (
-        <div></div>
-      )}
+      </RoleGate>
     </div>
   );
 }

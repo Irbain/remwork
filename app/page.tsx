@@ -1,10 +1,10 @@
-import Divider from "./components/Divider";
-import Footer from "./components/Footer";
-import NewsLetters from "./components/sections/NewsLetters";
-import MaxWidthWrapper from "./components/MaxWidthWrapper";
-import TopSection from "./components/sections/TopSection";
-import { AccordionDemo } from "./components/sections/AccordionDemo";
-import Advantages from "./components/sections/Advantages";
+import Divider from "../components/Divider";
+import Footer from "../components/Footer";
+import NewsLetters from "../components/sections/NewsLetters";
+import MaxWidthWrapper from "../components/MaxWidthWrapper";
+import TopSection from "../components/sections/TopSection";
+import { AccordionDemo } from "../components/sections/AccordionDemo";
+import Advantages from "../components/sections/Advantages";
 import Link from "next/link";
 
 export default function Home() {

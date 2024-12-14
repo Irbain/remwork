@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Globe, Users, Briefcase, TrendingUp } from "lucide-react";
-import Footer from "../components/Footer";
+import Footer from "../../components/Footer";
 
 export default function AboutPage() {
   return (
